@@ -4,18 +4,13 @@
 		<title>Quit Smoking!</title>
 
 		<style>
-			body
-			{
-				font-family: verdana;
-			}
-
 			svg
 			{
-				width: 100%;
-				height: 100%;
+				width: 800px;
+				height: 500px;
 			}
 
-			.chartTitle
+			.h1
 			{
 				font: bold 16px verdana;
 				fill: rgba(0, 0, 0, 1);
@@ -39,6 +34,8 @@
 	</head>
 
 	<body>
+		<h1>The Chinups - Cigarettes Combo Chart</h1>
+
 		<svg>
 
 		</svg>
@@ -52,6 +49,13 @@
 				{
 
 				},
+				drawAxes: function(maxUnits, dataPoints) 
+				{
+					var emPerUnit = 400 / maxUnits;
+					var emPerPoint = 700 / dataPoints;
+
+					
+				},
 				drawLine: function() 
 				{
 
@@ -64,6 +68,7 @@
 
 			d3.csv("combo.csv", function(data) 
 			{
+				console.log(data);
 			    for (var i = 0; i < data.length; i++) 
 			    {
 
