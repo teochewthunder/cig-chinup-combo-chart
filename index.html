@@ -28,6 +28,12 @@
                 fill: rgba(100, 100, 100, 1);
                 text-anchor: end;
             }
+
+			.lineChart
+            {
+                stroke: rgba(0, 0, 0, 1);
+                stroke-width: 2px;
+            } 
 		</style>
 
 		<script src="https://d3js.org/d3.v4.min.js"></script>
@@ -133,11 +139,49 @@
 	                {
 	                    return d + "px";
 	                })
-	                .attr("y1", "460px");	                             
+	                .attr("y2", "460px");
+
+	                this.drawLines(chart, pxPerUnit, pxPerPoint);	                             
 				},
 				drawLines: function(chart, pxPerUnit, pxPerPoint) 
 				{
+					var cigData = this.cigData;
+console.log(this.maxUnits, this.dataPoints)
+	                chart.selectAll("line.lineChart")
+	                .data(cigData)
+	                .enter()
+	                .append("line")
+	                .attr("class", "lineChart")
+	                .attr("x1", function(d, i) 
+	                {
+	                    var val = i;
 
+	                    if (i > 0)
+	                    {
+	                        val = val - 1;                   
+	                    }
+
+	                    return ((val * pxPerPoint) + 50) + "px";
+	                })
+	                .attr("x2", function(d, i) 
+	                {
+	                    return ((i * pxPerPoint) + 50) + "px";
+	                })
+	                .attr("y1", function(d, i) 
+	                {
+	                    var val = d;
+
+	                    if (i > 0)
+	                    {
+	                        val = cigData[i - 1];
+	                    }
+
+	                    return (450 - (val * pxPerUnit)) + "px";
+	                })
+	                .attr("y2", function(d) 
+	                {
+	                    return (450 - (d * pxPerUnit)) + "px";
+	                });
 				},
 				drawBars: function(chart, pxPerUnit, pxPerPoint) 
 				{
@@ -152,8 +196,8 @@
 
 			    for (var i = 0; i < data.length; i++) 
 			    {
-			    	comboChart.chinupData.push(data[i].reps);
-			    	comboChart.cigData.push(data[i].cigs);
+			    	comboChart.chinupData.push(data[i].Reps);
+			    	comboChart.cigData.push(data[i].Cigs);
 			    }
 
 			    comboChart.drawCharts();
