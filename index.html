@@ -16,7 +16,7 @@
 				fill: rgba(0, 0, 0, 1);
 			}
 			
-			.scaleTick, .axesVertical, .axesHorizontal
+			.scaleTick, .axesTick, .axesVertical, .axesHorizontal
             {
                 stroke: rgba(100, 100, 100, 1);
                 stroke-width: 1px;
@@ -45,7 +45,7 @@
 			{
 				cigData: [],
 				chinupData: [],
-				maxUnits: 1,
+				maxUnits: 10,
 				dataPoints: 1,
 				drawCharts: function() 
 				{
@@ -76,7 +76,7 @@
 					var pxPerPoint = Math.floor(700 / this.dataPoints);
 
 					var scale = [];
-					for (var i = 400; i >= 50; i -= pxPerUnit)
+					for (var i = 450; i >= 50; i -= pxPerUnit)
 					{
 						scale.push(i);
 					}
@@ -111,7 +111,29 @@
 	                function(d, i) 
 	                {
 	                    return i;
-	                });	 	                             
+	                });	 
+
+					var axes = [];
+					for (var i = 750; i >= 50; i -= pxPerPoint)
+					{
+						axes.push(i);
+					}
+
+	                chart.selectAll("line.axesTick")
+	                .data(axes)
+	                .enter()
+	                .append("line")
+	                .attr("class", "axesTick")
+	                .attr("x1", function(d) 
+	                {
+	                    return d + "px";
+	                })
+	                .attr("y1", "450px")
+	                .attr("x2", function(d) 
+	                {
+	                    return d + "px";
+	                })
+	                .attr("y1", "460px");	                             
 				},
 				drawLines: function(chart, pxPerUnit, pxPerPoint) 
 				{
@@ -130,8 +152,6 @@
 
 			    for (var i = 0; i < data.length; i++) 
 			    {
-			    	if (data[i].Reps > comboChart.maxUnits) comboChart.maxUnits = data[i].Reps;
-			    	if (data[i].Cigs > comboChart.maxUnits) comboChart.maxUnits = data[i].Cigs;
 			    	comboChart.chinupData.push(data[i].reps);
 			    	comboChart.cigData.push(data[i].cigs);
 			    }
