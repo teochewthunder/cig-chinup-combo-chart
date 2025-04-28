@@ -34,6 +34,12 @@
                 stroke: rgba(0, 0, 0, 1);
                 stroke-width: 2px;
             } 
+
+			.barChart
+            {
+                fill: rgba(100, 100, 100, 0.5);
+                stroke-width: 0px;
+            } 
 		</style>
 
 		<script src="https://d3js.org/d3.v4.min.js"></script>
@@ -140,13 +146,14 @@
 	                    return d + "px";
 	                })
 	                .attr("y2", "460px");
-
-	                this.drawLines(chart, pxPerUnit, pxPerPoint);	                             
+	                
+	                this.drawBars(chart, pxPerUnit, pxPerPoint);	                              
+	                this.drawLines(chart, pxPerUnit, pxPerPoint);	
 				},
 				drawLines: function(chart, pxPerUnit, pxPerPoint) 
 				{
 					var cigData = this.cigData;
-console.log(this.maxUnits, this.dataPoints)
+
 	                chart.selectAll("line.lineChart")
 	                .data(cigData)
 	                .enter()
@@ -185,7 +192,29 @@ console.log(this.maxUnits, this.dataPoints)
 				},
 				drawBars: function(chart, pxPerUnit, pxPerPoint) 
 				{
+					var chinupData = this.chinupData;
 
+	                chart.selectAll("rect.barChart")
+	                .data(chinupData)
+	                .enter()
+	                .append("rect")
+	                .attr("class", "barChart")
+	                .attr("x", function(d, i) 
+	                {
+	                    return ((i * pxPerPoint) + 50) + "px";
+	                })
+	                .attr("y", function(d) 
+	                {
+	                    return (450 - (d * pxPerUnit)) + "px";
+	                })
+	                .attr("width", function(d) 
+	                {
+	                    return pxPerPoint + "em";
+	                })
+	                .attr("height", function(d) 
+	                {
+	                    return (d * pxPerUnit) + "px";
+	                });          
 				}
 			};
 
