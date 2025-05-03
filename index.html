@@ -209,10 +209,7 @@
 	                {
 	                    return (450 - (d * pxPerUnit)) + "px";
 	                })
-	                .attr("width", function(d) 
-	                {
-	                    return pxPerPoint + "px";
-	                })
+	                .attr("width", pxPerPoint + "px")
 	                .attr("height", function(d) 
 	                {
 	                    return (d * pxPerUnit) + "px";
