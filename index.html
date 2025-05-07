@@ -57,7 +57,7 @@
 			{
 				cigData: [],
 				chinupData: [],
-				maxUnits: 10,
+				maxUnits: 1,
 				dataPoints: 1,
 				drawCharts: function() 
 				{
@@ -219,14 +219,19 @@
 
 			d3.csv("combo.csv", function(data) 
 			{
-				console.log(data);
 				comboChart.dataPoints = data.length;
 
 			    for (var i = 0; i < data.length; i++) 
 			    {
-			    	comboChart.chinupData.push(data[i].Reps);
-			    	comboChart.cigData.push(data[i].Cigs);
+			    	comboChart.chinupData.push(parseInt(data[i].Reps));
+			    	comboChart.cigData.push(parseInt(data[i].Cigs));
 			    }
+
+			    var maxReps = d3.max(comboChart.chinupData);
+			    var maxCigs = d3.max(comboChart.cigData);
+
+			    if (comboChart.maxUnits < maxReps) comboChart.maxUnits = maxReps;
+			    if (comboChart.maxUnits < maxCigs) comboChart.maxUnits = maxCigs;
 
 			    comboChart.drawCharts();
 			});
