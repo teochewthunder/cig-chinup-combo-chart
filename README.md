@@ -1,4 +1,4 @@
-# cig-chinup-combo-chart (TBA)
+# cig-chinup-combo-chart
 
 SVG is 800 by 500 pixels, with 50 pixel buffer all around.
 
