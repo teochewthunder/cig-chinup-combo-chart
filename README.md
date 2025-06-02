@@ -22,4 +22,8 @@ SVG is 800 by 500 pixels, with 50 pixel buffer all around.
   - Call `drawLines()`, passing in the SVG as an argument, `pxPerUnit` and `pxPerPoint` as arguments.
   - Call `drawBars()`, passing in the SVG as an argument, `pxPerUnit` and `pxPerPoint` as arguments.
 - `drawLines(chart, pxPerUnit, pxPerPoint)`:
+  -  Use `pxPerUnit` and `pxPerPoint` to add line tags in `chart`.
+  -  The data used is `cigData`.
 - `drawBars(chart, pxPerUnit, pxPerPoint)`:
+  -  Use `pxPerUnit` and `pxPerPoint` to add rect tags in `chart`.
+  -  The data used is `chinupData`.
